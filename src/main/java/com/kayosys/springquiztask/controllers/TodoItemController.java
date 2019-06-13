@@ -1,5 +1,6 @@
 package com.kayosys.springquiztask.controllers;
 
+import com.kayosys.springquiztask.entities.ResponseModel;
 import com.kayosys.springquiztask.entities.TodoItem;
 import com.kayosys.springquiztask.services.TodoItemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
@@ -26,23 +28,25 @@ public class TodoItemController {
 
     /*-- to Allow user to add new todo --*/
     @RequestMapping(value = "", method = RequestMethod.POST)
+    @CrossOrigin
     public @ResponseBody
-    String createTodoItem(@RequestBody TodoItem todoItem) {
+    ResponseModel createTodoItem(@RequestBody TodoItem todoItem) {
          /*-- validating all fields --*/
          long currentMilliseconds = System.currentTimeMillis();
         if(todoItem.getTitle()!=null && !todoItem.getTitle().equals("")
                 && todoItem.getDescription()!=null && !todoItem.getDescription().equals("")
                 && todoItem.getEventTime()>currentMilliseconds){
             todoItemService.save(todoItem);
-            return "task created successfully";
+            return new ResponseModel("task created successfully",200,true);
         }
         else {
-           return "Bad Request"; 
+           return new ResponseModel("Invalid data!!",412,false);
         }
     }
 
     /*-- to get all todo --*/
     @RequestMapping(value = "", method = RequestMethod.GET)
+    @CrossOrigin
     public @ResponseBody
     List<TodoItem> findAll() {
         return todoItemService.findAll();
@@ -50,29 +54,31 @@ public class TodoItemController {
 
     /*-- to update the existing todo --*/
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    @CrossOrigin
     public @ResponseBody
-    String update(@PathVariable("id") Long todoItemId, @RequestBody TodoItem todoItem) {
+    ResponseModel update(@PathVariable("id") Long todoItemId, @RequestBody TodoItem todoItem) {
         /*-- validating fields --*/
          long currentMilliseconds = System.currentTimeMillis();
         if(todoItem.getTitle()!=null && todoItem.getDescription()!=null && todoItem.getEventTime()>currentMilliseconds){
             todoItemService.update(todoItemId, todoItem);
-            return "todos updated successfully";
+            return new ResponseModel("todos updated successfully",200,true);
         } else {
-           return "Bad request!";
+           return new ResponseModel("Invalid data!!",412,false);
         }        
     }
     
      /*-- to delete single todo or multiple todo --*/
     @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
+    @CrossOrigin
     public 
-    String delete(@RequestParam("id") Long[] todoItemId) {
+    ResponseModel delete(@RequestParam("id") Long[] todoItemId) {
         if(todoItemId.length>0){
             for(long todo : todoItemId){
             todoItemService.delete(todo);
-        } 
-            return "record removed successfully!!";
+        }
+            return new ResponseModel("record removed successfully!!",200,true);
         } else {
-        return "Bad Request!!";
+        return new ResponseModel("Invalid data!!",412,false);
         }
     }
    
