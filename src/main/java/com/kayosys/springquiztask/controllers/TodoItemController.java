@@ -28,7 +28,7 @@ public class TodoItemController {
 
     /*-- to Allow user to add new todo --*/
     @RequestMapping(value = "", method = RequestMethod.POST)
-    @CrossOrigin
+    @CrossOrigin(origins = "http://localhost:4200")
     public @ResponseBody
     ResponseModel createTodoItem(@RequestBody TodoItem todoItem) {
          /*-- validating all fields --*/
@@ -46,7 +46,7 @@ public class TodoItemController {
 
     /*-- to get all todo --*/
     @RequestMapping(value = "", method = RequestMethod.GET)
-    @CrossOrigin
+    @CrossOrigin(origins = "http://localhost:4200")
     public @ResponseBody
     List<TodoItem> findAll() {
         return todoItemService.findAll();
@@ -54,7 +54,7 @@ public class TodoItemController {
 
     /*-- to update the existing todo --*/
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    @CrossOrigin
+    @CrossOrigin(origins = "http://localhost:4200")
     public @ResponseBody
     ResponseModel update(@PathVariable("id") Long todoItemId, @RequestBody TodoItem todoItem) {
         /*-- validating fields --*/
@@ -69,7 +69,7 @@ public class TodoItemController {
     
      /*-- to delete single todo or multiple todo --*/
     @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
-    @CrossOrigin
+    @CrossOrigin(origins = "http://localhost:4200")
     public 
     ResponseModel delete(@RequestParam("id") Long[] todoItemId) {
         if(todoItemId.length>0){
