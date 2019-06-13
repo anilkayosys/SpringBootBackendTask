@@ -16,6 +16,6 @@ This project is for Rest services using Spring boot framework and MySql database
 - Now to enable cross origin Change `@CrossOrigin(origins = "http://localhost:4200")` to your localhost and port ([TodoItemController](https://github.com/anilkayosys/SpringBootBackendTask/blob/master/src/main/java/com/kayosys/springquiztask/controllers/TodoItemController.java))
 
 ## Run Rest Services
-- To run the rest services you need to run the MytodoApplication.java class ([MytodoApplication](https://github.com/anilkayosys/SpringBootBackendTask/blob/master/src/main/java/com/kayosys/springquiztask/MytodoApplication.java))
+- To run the rest services you need to run the `MytodoApplication.java` class ([MytodoApplication](https://github.com/anilkayosys/SpringBootBackendTask/blob/master/src/main/java/com/kayosys/springquiztask/MytodoApplication.java))
 
 
