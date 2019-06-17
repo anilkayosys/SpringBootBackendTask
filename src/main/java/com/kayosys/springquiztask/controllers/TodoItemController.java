@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 @RequestMapping(value = "/api/v1/todo-item")
 public class TodoItemController {
 
-    @Autowired
+     @Autowired
     TodoItemService todoItemService;
 
     public TodoItemController(TodoItemService todoItemService) {
