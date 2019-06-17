@@ -2,7 +2,7 @@ package com.kayosys.springquiztask.entities;
 
 
 /*
-Model class for todo
+Model class for Delete multiple items
 */
 
 public class DeleteItemModel {
